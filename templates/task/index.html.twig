@@ -3,7 +3,7 @@
 {% block title %}Task index{% endblock %}
 
 {% block body %}
-    <h1>Task index</h1>
+    <h1 class="py-5 text-center">Voici la liste des tâches</h1>
 
     <table class="table">
         <thead>
@@ -27,11 +27,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de tache pour le moment</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_task_new') }}">Create new</a>
+    <a href="{{ path('app_task_new') }}">Ajouter une nouvelle tâche</a>
 {% endblock %}
