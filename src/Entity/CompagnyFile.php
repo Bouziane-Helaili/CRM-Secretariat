@@ -19,6 +19,10 @@ class CompagnyFile
     #[ORM\ManyToOne(inversedBy: 'compagnyFiles')]
     private ?Compagny $compagny = null;
 
+    #[ORM\ManyToOne(inversedBy: 'compagnyFiles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoryFile $categoryFile = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class CompagnyFile
     public function setCompagny(?Compagny $compagny): self
     {
         $this->compagny = $compagny;
+
+        return $this;
+    }
+
+    public function getCategoryFile(): ?CategoryFile
+    {
+        return $this->categoryFile;
+    }
+
+    public function setCategoryFile(?CategoryFile $categoryFile): self
+    {
+        $this->categoryFile = $categoryFile;
 
         return $this;
     }

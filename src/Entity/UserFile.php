@@ -19,6 +19,10 @@ class UserFile
     #[ORM\ManyToOne(inversedBy: 'userFiles')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'userFiles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoryFile $categoryFile = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class UserFile
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCategoryFile(): ?CategoryFile
+    {
+        return $this->categoryFile;
+    }
+
+    public function setCategoryFile(?CategoryFile $categoryFile): self
+    {
+        $this->categoryFile = $categoryFile;
 
         return $this;
     }
