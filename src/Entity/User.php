@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -60,6 +62,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Status $status = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Task::class)]
+    private Collection $tasks;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserFile::class)]
+    private Collection $userFiles;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+        $this->userFiles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -259,6 +276,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Task>
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks->add($task);
+            $task->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->removeElement($task)) {
+            // set the owning side to null (unless already changed)
+            if ($task->getUser() === $this) {
+                $task->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserFile>
+     */
+    public function getUserFiles(): Collection
+    {
+        return $this->userFiles;
+    }
+
+    public function addUserFile(UserFile $userFile): self
+    {
+        if (!$this->userFiles->contains($userFile)) {
+            $this->userFiles->add($userFile);
+            $userFile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserFile(UserFile $userFile): self
+    {
+        if ($this->userFiles->removeElement($userFile)) {
+            // set the owning side to null (unless already changed)
+            if ($userFile->getUser() === $this) {
+                $userFile->setUser(null);
+            }
+        }
 
         return $this;
     }

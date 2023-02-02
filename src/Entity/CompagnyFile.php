@@ -16,6 +16,9 @@ class CompagnyFile
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\ManyToOne(inversedBy: 'compagnyFiles')]
+    private ?Compagny $compagny = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class CompagnyFile
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCompagny(): ?Compagny
+    {
+        return $this->compagny;
+    }
+
+    public function setCompagny(?Compagny $compagny): self
+    {
+        $this->compagny = $compagny;
 
         return $this;
     }

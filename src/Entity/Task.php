@@ -19,6 +19,9 @@ class Task
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $madeBy = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Task
     public function setMadeBy(?string $madeBy): self
     {
         $this->madeBy = $madeBy;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
