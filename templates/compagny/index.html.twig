@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compagny index{% endblock %}
+
+{% block body %}
+    <h1>Compagny index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CompagnyName</th>
+                <th>LeaderName</th>
+                <th>LeaderFirstName</th>
+                <th>Address</th>
+                <th>AdditionalAddress</th>
+                <th>ZipCode</th>
+                <th>City</th>
+                <th>Mail</th>
+                <th>Phone</th>
+                <th>SiretNumber</th>
+                <th>Comment</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compagny in compagnies %}
+            <tr>
+                <td>{{ compagny.id }}</td>
+                <td>{{ compagny.compagnyName }}</td>
+                <td>{{ compagny.leaderName }}</td>
+                <td>{{ compagny.leaderFirstName }}</td>
+                <td>{{ compagny.address }}</td>
+                <td>{{ compagny.additionalAddress }}</td>
+                <td>{{ compagny.zipCode }}</td>
+                <td>{{ compagny.city }}</td>
+                <td>{{ compagny.mail }}</td>
+                <td>{{ compagny.phone }}</td>
+                <td>{{ compagny.siretNumber }}</td>
+                <td>{{ compagny.comment }}</td>
+                <td>
+                    <a href="{{ path('app_compagny_show', {'id': compagny.id}) }}">show</a>
+                    <a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_compagny_new') }}">Create new</a>
+{% endblock %}
