@@ -9,7 +9,7 @@
 		<link href="{{asset('assets/css/styles.css')}}" rel="stylesheet"/>
 		<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Accueil
 			{% endblock %}
 		</title>
 		<link
@@ -23,11 +23,11 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body>
+	<body class="sb-nav-fixed" >
 		<nav
 			class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 			<!-- Navbar Brand-->
-			<a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+			<a class="navbar-brand ps-3" href="#">Mon assistante pro</a>
 			<!-- Sidebar Toggle-->
 			<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
 				<i class="fas fa-bars"></i>
@@ -67,34 +67,64 @@
 				<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 					<div class="sb-sidenav-menu">
 						<div class="nav">
-							<div class="sb-sidenav-menu-heading">Core</div>
-							<a class="nav-link" href="index.html">
+							{# <div class="sb-sidenav-menu-heading">Core</div> #}
+							<a class="nav-link" href="{{path('app_task_index')}}">
 								<div class="sb-nav-link-icon">
 									<i class="fas fa-tachometer-alt"></i>
 								</div>
-								Dashboard
+								ACCUEIL
 							</a>
 							<div class="sb-sidenav-menu-heading">Interface</div>
 							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 								<div class="sb-nav-link-icon">
 									<i class="fas fa-columns"></i>
 								</div>
-								Layouts
+								Les entreprises
 								<div class="sb-sidenav-collapse-arrow">
 									<i class="fas fa-angle-down"></i>
 								</div>
 							</a>
 							<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="layout-static.html">Static Navigation</a>
-									<a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+									<a class="nav-link" href="{{path('app_compagny_index')}}">Liste des entreprises</a>
+									<a class="nav-link" href="{{path('app_compagny_new')}}">Ajouter une entreprise</a>
+								</nav>
+							</div>
+							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
+								<div class="sb-nav-link-icon">
+									<i class="fas fa-columns"></i>
+								</div>
+								Les employés
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fas fa-angle-down"></i>
+								</div>
+							</a>
+							<div class="collapse" id="collapseLayouts2" aria-labelledby="headingToo" data-bs-parent="#sidenavAccordion2">
+								<nav class="sb-sidenav-menu-nested nav">
+									<a class="nav-link" href="{{path('app_user_index')}}">Liste des employés</a>
+									<a class="nav-link" href="{{path('app_user_new')}}">Ajouter un employé</a>
+								</nav>
+							</div>
+							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+								<div class="sb-nav-link-icon">
+									<i class="fas fa-columns"></i>
+								</div>
+								Les stagiaires
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fas fa-angle-down"></i>
+								</div>
+							</a>
+							<div class="collapse" id="collapseLayouts3" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion3">
+								<nav class="sb-sidenav-menu-nested nav">
+									<a class="nav-link" href="{{path('app_user_index')}}">Liste des stagiaires</a>
+									<a class="nav-link" href="{{path('app_user_new')}}">Ajouter un stagiaire</a>
 								</nav>
 							</div>
 							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
 								<div class="sb-nav-link-icon">
 									<i class="fas fa-book-open"></i>
 								</div>
-								Pages
+								Administration
 								<div class="sb-sidenav-collapse-arrow">
 									<i class="fas fa-angle-down"></i>
 								</div>
@@ -102,29 +132,27 @@
 							<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
 								<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
 									<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-										Authentication
+										Les statuts des stagiaires
 										<div class="sb-sidenav-collapse-arrow">
 											<i class="fas fa-angle-down"></i>
 										</div>
 									</a>
 									<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 										<nav class="sb-sidenav-menu-nested nav">
-											<a class="nav-link" href="login.html">Login</a>
-											<a class="nav-link" href="register.html">Register</a>
-											<a class="nav-link" href="password.html">Forgot Password</a>
+											<a class="nav-link" href="{{path('app_status_index')}}">Liste des statuts</a>
+											<a class="nav-link" href="{{path('app_status_new')}}">Ajouter un statut</a>
 										</nav>
 									</div>
 									<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-										Error
+										Les catégories des fichiers téléchargés
 										<div class="sb-sidenav-collapse-arrow">
 											<i class="fas fa-angle-down"></i>
 										</div>
 									</a>
 									<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 										<nav class="sb-sidenav-menu-nested nav">
-											<a class="nav-link" href="401.html">401 Page</a>
-											<a class="nav-link" href="404.html">404 Page</a>
-											<a class="nav-link" href="500.html">500 Page</a>
+											<a class="nav-link" href="{{path('app_category_file_index')}}">Liste des catégories</a>
+											<a class="nav-link" href="{{path('app_category_file_new')}}">Ajouter une catégorie</a>
 										</nav>
 									</div>
 								</nav>
@@ -150,35 +178,19 @@
 					</div>
 				</nav>
 			</div>
-			<div id="layoutSidenav_content">
+
+
+			<div id="layoutSidenav_content" class="bg-secondary">
 				<main>
 					<div class="container-fluid px-4">
-						<h1 class="mt-4">Static Navigation</h1>
-						{% block body %}{% endblock %}
-						<ol class="breadcrumb mb-4">
-							<li class="breadcrumb-item">
-								<a href="index.html">Dashboard</a>
-							</li>
-							<li class="breadcrumb-item active">Static Navigation</li>
-						</ol>
-						<div class="card mb-4">
-							<div class="card-body">
-								<p class="mb-0">
-									This page is an example of using static navigation. By removing the
-									<code>.sb-nav-fixed</code>
-									class from the
-									<code>body</code>
-									, the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-								</p>
-							</div>
-						</div>
-						<div style="height: 100vh"></div>
-						<div class="card mb-4">
-							<div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
-						</div>
+						<h1 class="mt-4">MON TABLEAU DE BORD</h1>
+						
+						
+						<div style="height: 100vh">{% block body %}{% endblock %}</div>
+						
 					</div>
 				</main>
-				<footer class="py-4 bg-light mt-auto">
+				<footer class="py-4 bg-light mt-auto bg-dark">
 					<div class="container-fluid px-4">
 						<div class="d-flex align-items-center justify-content-between small">
 							<div class="text-muted">Copyright &copy; Your Website 2022</div>
