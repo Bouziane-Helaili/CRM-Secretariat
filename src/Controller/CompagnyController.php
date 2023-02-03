@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Compagny;
+use App\Entity\CompagnyFile;
 use App\Form\CompagnyType;
 use App\Repository\CompagnyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,11 @@ class CompagnyController extends AbstractController
     public function new(Request $request, CompagnyRepository $compagnyRepository): Response
     {
         $compagny = new Compagny();
+        $compagnyFile =new CompagnyFile();
+        $compagny -> addCompagnyFile( $compagnyFile);
+
+
+
         $form = $this->createForm(CompagnyType::class, $compagny);
         $form->handleRequest($request);
 
@@ -34,7 +40,7 @@ class CompagnyController extends AbstractController
             return $this->redirectToRoute('app_compagny_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('compagny/new.html.twig', [
+        return $this->render('compagny/new.html.twig', [
             'compagny' => $compagny,
             'form' => $form,
         ]);

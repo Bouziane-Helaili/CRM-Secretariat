@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CompagnyRepository::class)]
+// #[UniqueEntity(message: "{{ value }} existe déjà")]
 class Compagny
 {
     #[ORM\Id]
@@ -16,7 +19,7 @@ class Compagny
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique:true)]
     private ?string $compagnyName = null;
 
     #[ORM\Column(length: 255)]
@@ -37,13 +40,16 @@ class Compagny
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique:true)]
+    #[Assert\Email(
+        message: "Le mail {{ value }} n'est pas valide.",
+    )]
     private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique:true)]
     private ?string $siretNumber = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

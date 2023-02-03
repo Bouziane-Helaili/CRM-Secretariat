@@ -6,8 +6,11 @@ use App\Repository\StatusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+// use Symfony\Component\Validator\Constraints\Unique;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: StatusRepository::class)]
+#[UniqueEntity(message: "{{ value }} existe déjà")]
 class Status
 {
     #[ORM\Id]
@@ -15,10 +18,10 @@ class Status
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique:true)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'status', targetEntity: User::class)]
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: User::class, unique: true)]
     private Collection $users;
 
     public function __construct()

@@ -4,17 +4,33 @@ namespace App\Form;
 
 use App\Entity\CategoryFile;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceFieldName;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+ use Symfony\Component\Form\FormTypeInterface;
+
+
+
 
 class CategoryFileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('type')
-        ;
+            ->add('name', TextType::class, [
+                'label' => "Nom de la catégorie"
+            ])
+            ->add('type', ChoiceType::class, [
+                'label' => "Cette catégorie est associée avec :",
+                'choices'  => [
+                    'Entreprise' => 'Entreprise',
+                    'Employé' =>  'Employé',
+                    'Stagiaire' => 'Stagiaire',
+                ],
+            ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

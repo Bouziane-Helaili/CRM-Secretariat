@@ -6,6 +6,7 @@ use App\Repository\CategoryFileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryFileRepository::class)]
 class CategoryFile
@@ -19,6 +20,7 @@ class CategoryFile
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Choice(['Employé', 'Stagiaire', 'Entreprise'])]
     private ?string $type = null;
 
     #[ORM\OneToMany(mappedBy: 'categoryFile', targetEntity: CompagnyFile::class)]
