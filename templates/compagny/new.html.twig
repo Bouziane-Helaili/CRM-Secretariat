@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Compagny{% endblock %}
+{% block title %}New Compagny
+{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Ajouter une nouvelle entreprise</h1>
+	<h1 class="py-5 text-center">Ajouter une nouvelle entreprise</h1>
 
-    {{ include('compagny/_form.html.twig') }}
+	
+		{{ component('compagny_add', {
+        compagny: compagny.id  ? compagny : null,
+        form : form
+    }) }}
+	
 
-    <a href="{{ path('app_compagny_index') }}">back to list</a>
+	<a href="{{ path('app_compagny_index') }}">back to list</a>
 {% endblock %}

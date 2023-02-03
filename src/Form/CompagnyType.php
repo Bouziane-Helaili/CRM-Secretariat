@@ -51,12 +51,12 @@ class CompagnyType extends AbstractType
             ->add('comment', TextareaType::class, [
                 'label' => "Commentaire"
             ])
-            // ->add('compagnyFile', CollectionType::class, [
-            //     'entry_type' => CompagnyFile::class,
-            //     'allow_add' => true,
-            //     'allow_delete' => true,
-            //     'by_reference' => false,
-            // ])
+            ->add('compagnyFiles', CollectionType::class, [
+                'entry_type' => CompagnyFileType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

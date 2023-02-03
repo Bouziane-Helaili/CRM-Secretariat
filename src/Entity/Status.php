@@ -18,10 +18,10 @@ class Status
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, unique:true)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'status', targetEntity: User::class, unique: true)]
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: User::class)]
     private Collection $users;
 
     public function __construct()
