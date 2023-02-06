@@ -24,7 +24,7 @@ class CompagnyAddComponent extends AbstractController
     public ?Compagny $compagny = null;
     protected function instantiateForm(): FormInterface
     {
-        return $this->createForm(CompagnyFileType::class, $this->compagny);
+        return $this->createForm(CompagnyType::class, $this->compagny);
     }
 
     #[LiveAction]
