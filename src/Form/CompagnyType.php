@@ -19,6 +19,7 @@ class CompagnyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+       
         $builder
             ->add('compagnyName', TextType::class, [
                 'label' => "Nom de l'entreprise"
@@ -56,6 +57,7 @@ class CompagnyType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                
             ])
         ;
     }

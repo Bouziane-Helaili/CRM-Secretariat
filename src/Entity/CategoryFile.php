@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CategoryFileRepository::class)]
 class CategoryFile
 {
-const Compagny = "Entreprise";
-const Employe = "Employé";
-const Stagiaire = "Stagiaire";
+const COMPAGNY = "Entreprise";
+const EMPLOYE = "Employé";
+const STAGIAIRE = "Stagiaire";
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
