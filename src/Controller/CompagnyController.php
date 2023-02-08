@@ -26,7 +26,7 @@ class CompagnyController extends AbstractController
     public function new(Request $request, CompagnyRepository $compagnyRepository): Response
     {
         $compagny = new Compagny();
-        $compagnyFile =new CompagnyFile();
+        $compagnyFile = new CompagnyFile();
         $compagny -> addCompagnyFile( $compagnyFile);
 
 

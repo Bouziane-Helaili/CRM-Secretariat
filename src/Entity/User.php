@@ -86,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Task::class)]
     private Collection $tasks;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserFile::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserFile::class, cascade:["persist"])]
     private Collection $userFiles;
 
     public function __construct()
