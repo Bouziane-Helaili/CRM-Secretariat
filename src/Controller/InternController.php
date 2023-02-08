@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserFile;
 use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,11 @@ class InternController extends AbstractController
     public function new(Request $request, UserRepository $userRepository): Response
     {
         $user = new User();
+        $userFile = new UserFile();
+        $user->addUserFile($userFile);
+
+
+
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
@@ -34,7 +40,7 @@ class InternController extends AbstractController
             return $this->redirectToRoute('app_intern_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('intern/new.html.twig', [
+        return $this->render('intern/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

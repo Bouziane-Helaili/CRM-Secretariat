@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,6 +39,7 @@ class User1Type extends AbstractType
                 'label' => 'Téléphone'
             ])
             // ->add('dateOfBirth')
+             ->add('email')
             ->add('ssNumber', NumberType::class, [
                 'label' => 'Numéro Sécurité Sociale'
             ])
@@ -45,7 +47,13 @@ class User1Type extends AbstractType
                 'label' => "Commentaire"
             ])
             ->add('status')
-        ;
+            ->add('userFiles', CollectionType::class, [
+                'entry_type' => UserFileType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

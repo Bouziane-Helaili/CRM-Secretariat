@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Nouveau stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+     <h1 class="py-5 text-center">Ajouter un nouveau stagiaire</h1>
 
-    {{ include('intern/_form.html.twig') }}
-
+   {{ component('intern_add', {
+        user: user.id  ? user : null,
+        form : form
+    }) }}
     <a href="{{ path('app_intern_index') }}">back to list</a>
 {% endblock %}

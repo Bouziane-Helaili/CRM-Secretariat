@@ -1,0 +1,36 @@
+<div{{attributes}} class="card text-white bg-dark container p-3">
+	{{ form_start(form) }}
+	<div class="text-white border border-light p-5 m-3 rounded-4">
+		<h2 class="my-3 text-center">INFORMATIONS Stagiaire</h2>
+
+		{{ form_start(form) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form.firstName) }}
+		{# {{ form_row(form.dateOfBirth) }} #}
+		{{ form_row(form.address) }}
+		{{ form_row(form.additionalAddress) }}
+		{{ form_row(form.zipCode) }}
+		{{ form_row(form.city) }}
+		{{ form_row(form.email) }}
+		{{ form_row(form.phone) }}
+		{{ form_row(form.ssNumber) }}
+		{{ form_row(form.comment) }}
+		{{ form_row(form.status) }}
+	</div>
+	<div class="text-white border border-light p-5 m-3 rounded-4">
+		<h2 class="my-3 text-center">Fichiers à télécharger</h2>
+
+		{% for key, userFileForm in form.userFiles %}
+
+			{{ form_widget(userFileForm) }}
+			<button data-action="live#action" data-action-name="removeUserFile(index={{ key }})" type="button" class="btn btn-sm btn-danger">Supprimer</button>
+		{% endfor %}
+	
+
+
+	<button data-action="live#action" data-action-name="addUserFile" type="button" class="btn btn-sm btn-primary">Ajouter</button>
+
+	<button type="submit" class="text-center btn btn-outline-light mt-3">Enregistrer</button>
+	{{ form_end(form) }}
+</div>
+</div>
