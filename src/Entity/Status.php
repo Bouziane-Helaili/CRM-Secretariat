@@ -72,7 +72,11 @@ class Status
                 $user->setStatus(null);
             }
         }
-
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
