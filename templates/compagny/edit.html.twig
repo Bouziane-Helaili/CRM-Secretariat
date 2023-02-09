@@ -5,7 +5,12 @@
 {% block body %}
     <h1 class="py-5 text-center">Edit Compagny</h1>
 
-    {{ include('compagny/_form.html.twig', {'button_label': 'Update'}) }}
+   {{ component('compagny_add', {
+        compagny: compagny.id  ? compagny : null,
+        form : form
+    },  {'button_label': 'Update'}) }} }}
+    
+    
 
     <a href="{{ path('app_compagny_index') }}">back to list</a>
 

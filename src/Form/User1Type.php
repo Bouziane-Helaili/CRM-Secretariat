@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\ORM\Query\Expr\Select;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -46,7 +48,9 @@ class User1Type extends AbstractType
             ->add('comment', TextareaType::class, [
                 'label' => "Commentaire"
             ])
-            ->add('status')
+            ->add('status', null, [
+                'label' => "Statuts"
+            ])
             ->add('userFiles', CollectionType::class, [
                 'entry_type' => UserFileType::class,
                 'allow_add' => true,
