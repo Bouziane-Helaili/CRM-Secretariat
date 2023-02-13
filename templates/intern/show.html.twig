@@ -73,6 +73,7 @@
     <a href="{{ path('app_intern_index') }}">back to list</a>
 
     <a href="{{ path('app_intern_edit', {'id': user.id}) }}">edit</a>
-
+<div class="alert alert-danger">
     {{ include('intern/_delete_form.html.twig') }}
+</div>
 {% endblock %}

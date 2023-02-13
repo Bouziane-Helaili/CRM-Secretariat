@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Compagny index
+{% block title %}Liste des entreprises
 {% endblock %}
 
 {% block body %}
@@ -39,8 +39,8 @@
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
 									<td>
-										<a href="{{ path('app_compagny_show', {'id': compagny.id}) }}">Voir le détail</a>
-										<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}">Modifier</a>
+										<a href="{{ path('app_compagny_show', {'id': compagny.id}) }}" class="btn btn-sm btn-primary">Voir le détail</a>
+										<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}" class="btn btn-sm btn-success">Modifier</a>
 									</td>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 				{% endfor %}
 			</div>
 
-	<a href="{{ path('app_compagny_new') }}">Rajouter une entreprise</a>
+	<a href="{{ path('app_compagny_new') }}" class="btn btn-sm btn-dark">Ajouter une entreprise</a>
 		</div>
 	</section>
 {# 

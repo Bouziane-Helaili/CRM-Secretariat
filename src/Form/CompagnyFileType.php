@@ -26,6 +26,7 @@ class CompagnyFileType extends AbstractType
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
+                'delete_label' => 'Effacer ce fichier',
                 'label' => 'Choix du fichier',
                 'download_label' => 'Télécharger le fichier',
                 'asset_helper' => true,

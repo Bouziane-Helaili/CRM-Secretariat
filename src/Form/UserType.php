@@ -42,7 +42,7 @@ class UserType extends AbstractType
             ->add('phone', NumberType::class, [
                 'label' => 'Téléphone'
             ])
-            // ->add('dateOfBirth')
+            ->add('dateOfBirth')
             ->add('ssNumber', NumberType::class, [
                 'label' => 'Numéro Sécurité Sociale'
             ])
