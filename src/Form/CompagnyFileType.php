@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\CategoryFile;
+use App\Entity\Compagny;
 use App\Entity\CompagnyFile;
 use App\Repository\CategoryFileRepository;
 use Doctrine\ORM\Mapping\Entity;
@@ -28,9 +29,13 @@ class CompagnyFileType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Effacer ce fichier',
                 'label' => 'Choix du fichier',
-                'download_label' => 'Télécharger le fichier',
+                // 'download_label' =>  static fn (CompagnyFile $compagny): string => $compagny->getImageName(),
+                'download_label' => "Télécharger le fichier",
                 'asset_helper' => true,
-            ])
+                "by_reference"=> true,
+                
+            ],
+            )
             // ->add('compagny')
             ->add('categoryFile', EntityType::class, [
                 "class" => CategoryFile::class,

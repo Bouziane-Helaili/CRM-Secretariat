@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/user')]
@@ -17,17 +18,24 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
+        
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository,  UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
         $userFile = new UserFile();
         $user->addUserFile($userFile);
+        $user->setRoles(['ROLE_USER']);
+        $user->setPassword(
+            $userPasswordHasher->hashPassword(
+                $user,
+                '123456'
+            ));
 
 
 
@@ -59,7 +67,7 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+// dd($user->getRoles());
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 

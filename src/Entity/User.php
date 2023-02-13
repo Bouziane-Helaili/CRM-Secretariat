@@ -87,6 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $tasks;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserFile::class, cascade:["persist"])]
+    // #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $userFiles;
 
     public function __construct()
@@ -129,7 +130,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }

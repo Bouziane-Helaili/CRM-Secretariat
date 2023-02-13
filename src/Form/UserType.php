@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\UserFile;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +20,15 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            // ->add('roles')
+            ->add('roles', ChoiceType::class, [
+                'label' => "fonction",
+                'choices' => [
+                    'Employé' => 'ROLE_USER',
+                    'Direction' => 'ROLE_ADMIN',
+                ],
+                'expanded'=> false,
+                'multiple'=> true,
+            ])
             // ->add('password')
             ->add('name', TextType::class, [
                 'label' => "Nom de l'employé"
@@ -42,7 +52,10 @@ class UserType extends AbstractType
             ->add('phone', NumberType::class, [
                 'label' => 'Téléphone'
             ])
-            ->add('dateOfBirth')
+            ->add('dateOfBirth', DateType::class, [
+                'label' => "date de naissance",
+                'by_reference' => true,
+            ])
             ->add('ssNumber', NumberType::class, [
                 'label' => 'Numéro Sécurité Sociale'
             ])

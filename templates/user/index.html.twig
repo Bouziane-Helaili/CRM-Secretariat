@@ -11,6 +11,8 @@
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				{% for user in users %}
+				
+					
 					<div class="col mb-5 card text-white bg-dark container p-2 ">
 						<div class="card-body p-4">
 							<div>
@@ -24,24 +26,29 @@
 									<span class="text-muted">Email :
 									</span>
 									{{ user.email }}</div>
+								<div>
+									<span class="text-muted">Fonction :
+									</span>
+									{{ user.roles ? user.roles|json_encode : '' }}</div>
 							</div>
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
 								<td>
-									<a href="{{ path('app_user_show', {'id': user.id}) }}">Voir la fiche</a>
-									<a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+									<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-primary">Voir la fiche</a>
+									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
 								</td>
 							</div>
 						</div>
 					</div>
+	
 				{% else %}
 					<tr>
 						<td colspan="9">Aucun employé trouvé</td>
 					</tr>
 				{% endfor %}
 			</div>
-			<a href="{{ path('app_user_new') }}">Rajouter un employé</a>
+			<a href="{{ path('app_user_new') }}" class="btn btn-sm btn-dark">Ajouter un employé</a>
 		</div>
 	</section>
 {% endblock %}

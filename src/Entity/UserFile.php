@@ -28,7 +28,8 @@ class UserFile
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userFiles')]
+    #[ORM\ManyToOne(inversedBy: 'userFiles', cascade:["persist"])]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'userFiles')]
