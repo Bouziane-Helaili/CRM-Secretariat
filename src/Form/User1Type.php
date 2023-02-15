@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Select;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,7 +41,10 @@ class User1Type extends AbstractType
             ->add('phone', NumberType::class, [
                 'label' => 'Téléphone'
             ])
-            // ->add('dateOfBirth')
+            ->add('dateOfBirth', DateType::class, [
+                'label' => "date de naissance",
+                'by_reference' => true,
+            ])
              ->add('email')
             ->add('ssNumber', NumberType::class, [
                 'label' => 'Numéro Sécurité Sociale'
@@ -56,7 +60,6 @@ class User1Type extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-
             ]);
     }
 

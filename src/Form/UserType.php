@@ -28,7 +28,20 @@ class UserType extends AbstractType
                 ],
                 'expanded'=> false,
                 'multiple'=> true,
+                'data' => ['ROLE_USER']
             ])
+        //     ->add('roles', ChoiceType::class, [
+        //         // 'mapped' => false,
+        //         'label' => 'rôle',
+        //         'choices' => [
+                   
+        //             'Direction' => ['ROLE_ADMIN'],
+        //             'Employé' => ['ROLE_USER'],
+        //         ],
+        //         'data' => ['ROLE_USER'],
+        //         'expanded'=> true,
+        //         'multiple'=> false,
+        // ])
             // ->add('password')
             ->add('name', TextType::class, [
                 'label' => "Nom de l'employé"

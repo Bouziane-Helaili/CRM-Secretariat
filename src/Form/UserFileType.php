@@ -29,8 +29,8 @@ class UserFileType extends AbstractType
                 "class" => CategoryFile::class,
                 'label' => "Choisir la catégorie associé à ce fichier :",
                 "query_builder"=> function (CategoryFileRepository $er) {
-                    return $er->createQueryBuilder('c')
-                    ->andWhere("c.type = :type")
+                    return $er->createQueryBuilder('e')
+                    ->andWhere("e.type = :type")
                     ->setParameter("type", CategoryFile::EMPLOYE);
                 }
             ])

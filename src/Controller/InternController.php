@@ -28,6 +28,7 @@ class InternController extends AbstractController
         $user = new User();
         $userFile = new UserFile();
         $user->addUserFile($userFile);
+        $user->setRoles(['']);
 
 
 

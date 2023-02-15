@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class UserFileType extends AbstractType
+class InternFileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -29,8 +29,8 @@ class UserFileType extends AbstractType
                 "class" => CategoryFile::class,
                 'label' => "Choisir la catégorie associé à ce fichier :",
                 "query_builder"=> function (CategoryFileRepository $er) {
-                    return $er->createQueryBuilder('c')
-                    ->andWhere("c.type = :type")
+                    return $er->createQueryBuilder('s')
+                    ->andWhere("s.type = :type")
                     ->setParameter("type", CategoryFile::STAGIAIRE);
                 }
             ])

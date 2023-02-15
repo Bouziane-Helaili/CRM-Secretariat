@@ -6,11 +6,13 @@ use App\Entity\User;
 use App\Entity\UserFile;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Role\Role;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -18,9 +20,19 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        
+
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            // 'users' => $userRepository->findBy(["email"=>"bouziane@hotmail.fr"]),
+        ]);
+    }
+
+    #[Route('/employe', name: 'app_employe_index', methods: ['GET'])]
+    public function indexEmploye(ManagerRegistry $doctrine, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findByRoles('["ROLE_USER"]');
+        return $this->render('user/index.html.twig', [
+            'users' => $user
         ]);
     }
 
@@ -30,12 +42,14 @@ class UserController extends AbstractController
         $user = new User();
         $userFile = new UserFile();
         $user->addUserFile($userFile);
+        $user->setIsFirstLogin(true);
         $user->setRoles(['ROLE_USER']);
         $user->setPassword(
             $userPasswordHasher->hashPassword(
                 $user,
                 '123456'
-            ));
+            )
+        );
 
 
 
@@ -67,7 +81,7 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-// dd($user->getRoles());
+        // dd($user->getRoles());
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
