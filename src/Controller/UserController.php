@@ -27,13 +27,21 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/employe', name: 'app_employe_index', methods: ['GET'])]
+    #[Route('/employe', name: 'app_employe_index', methods: ['GET'])]   
+    
     public function indexEmploye(ManagerRegistry $doctrine, UserRepository $userRepository): Response
     {
-        $user = $userRepository->findByRoles('["ROLE_USER"]');
-        return $this->render('user/index.html.twig', [
-            'users' => $user
-        ]);
+        if ($this->isGranted("ROLE_ADMIN")) {
+            return $this->render('user/index.html.twig', [
+                'users' => $userRepository->findAll()            ]);
+        }elseif($this->isGranted("ROLE_USER")){
+            $user = $userRepository->findByRoles('["ROLE_USER"]');
+            return $this->render('user/index.html.twig', [
+                'users' => $user
+            ]);
+        }else{
+            return $this->redirectToRoute('app_login');
+        };
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]

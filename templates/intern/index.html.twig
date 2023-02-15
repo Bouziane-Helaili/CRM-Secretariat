@@ -6,55 +6,48 @@
 {% block body %}
 	<h1>Liste des stagiaires</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Email</th>
-				<th>Roles</th>
-				<th>Name</th>
-				<th>FirstName</th>
-				<th>IsFirstLogin</th>
-				<th>Address</th>
-				<th>AdditionalAddress</th>
-				<th>ZipCode</th>
-				<th>City</th>
-				<th>Phone</th>
-				<th>DateOfBirth</th>
-				<th>SsNumber</th>
-				<th>Comment</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for user in users %}
-				<tr>
-					<td>{{ user.id }}</td>
-					<td>{{ user.email }}</td>
-					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-					<td>{{ user.name }}</td>
-					<td>{{ user.firstName }}</td>
-					<td>{{ user.IsFirstLogin ? 'Yes' : 'No' }}</td>
-					<td>{{ user.address }}</td>
-					<td>{{ user.additionalAddress }}</td>
-					<td>{{ user.zipCode }}</td>
-					<td>{{ user.city }}</td>
-					<td>{{ user.phone }}</td>
-					<td>{{ user.dateOfBirth ? user.dateOfBirth|date('Y-m-d') : '' }}</td>
-					<td>{{ user.ssNumber }}</td>
-					<td>{{ user.comment }}</td>
-					<td>
-						<a href="{{ path('app_intern_show', {'id': user.id}) }}">show</a>
-						<a href="{{ path('app_intern_edit', {'id': user.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="16">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-	<a href="{{ path('app_intern_new') }}">Create new</a>
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+				
+				{% for user in users %}
+					
+					<div class="col mb-5 card text-white bg-dark container p-2 ">
+						<div class="card-body p-4">
+							<div>
+								<h5 class="fw-bolder text-center">{{ user.name }}
+									{{ user.firstName }}</h5>
+								<div>
+									<span class="text-muted">Téléphone :
+									</span>
+									{{ user.phone }}</div>
+								<div>
+									<span class="text-muted">Email :
+									</span>
+									{{ user.email }}</div>
+								<div>
+									<span class="text-muted">Fonction :
+									</span>
+									{{ user.roles ? user.roles|json_encode : '' }}</div>
+							</div>
+						</div>
+						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+							<div class="text-center">
+								<td>
+									<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-primary">Voir la fiche</a>
+									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+								</td>
+							</div>
+						</div>
+					</div>
+	
+				{% else %}
+					<tr>
+						<td colspan="9">Aucun employé trouvé</td>
+					</tr>
+				{% endfor %}
+			</div>
+			<a href="{{ path('app_user_new') }}" class="btn btn-sm btn-dark">Ajouter un employé</a>
+		</div>
+	</section>
 {% endblock %}
