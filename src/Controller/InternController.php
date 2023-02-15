@@ -17,9 +17,17 @@ class InternController extends AbstractController
     #[Route('/', name: 'app_intern_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
+    if($this->isGranted("ROLE_USER")){
+        $user = $userRepository->findByRoles('[]');
         return $this->render('intern/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $user
         ]);
+    }else{
+        return $this->redirectToRoute('app_login');
+    };
+        // return $this->render('intern/index.html.twig', [
+        //     'users' => $userRepository->findAll(),
+        // ]);
     }
 
     #[Route('/new', name: 'app_intern_new', methods: ['GET', 'POST'])]

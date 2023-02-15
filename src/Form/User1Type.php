@@ -56,7 +56,7 @@ class User1Type extends AbstractType
                 'label' => "Statuts"
             ])
             ->add('userFiles', CollectionType::class, [
-                'entry_type' => UserFileType::class,
+                'entry_type' => InternFileType ::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

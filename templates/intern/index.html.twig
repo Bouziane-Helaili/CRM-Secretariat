@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des stagiaires</h1>
+	<h1 class="py-5 text-center">Liste des stagiaires</h1>
 
 	<section class="py-5">
 		<div class="container px-4 px-lg-5 mt-5">
@@ -26,16 +26,16 @@
 									</span>
 									{{ user.email }}</div>
 								<div>
-									<span class="text-muted">Fonction :
+									<span class="text-muted">Statuts :
 									</span>
-									{{ user.roles ? user.roles|json_encode : '' }}</div>
+									{{ user.status }}</div>
 							</div>
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
 								<td>
-									<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-primary">Voir la fiche</a>
-									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									<a href="{{ path('app_intern_show', {'id': user.id}) }}" class="btn btn-sm btn-primary">Voir la fiche</a>
+									<a href="{{ path('app_intern_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
 								</td>
 							</div>
 						</div>
@@ -43,11 +43,11 @@
 	
 				{% else %}
 					<tr>
-						<td colspan="9">Aucun employé trouvé</td>
+						<td colspan="9">Aucun stagiaire rouvé</td>
 					</tr>
 				{% endfor %}
 			</div>
-			<a href="{{ path('app_user_new') }}" class="btn btn-sm btn-dark">Ajouter un employé</a>
+			<a href="{{ path('app_intern_new') }}" class="btn btn-sm btn-dark">Ajouter un stagiaire</a>
 		</div>
 	</section>
 {% endblock %}

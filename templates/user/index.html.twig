@@ -29,7 +29,14 @@
 								<div>
 									<span class="text-muted">Fonction :
 									</span>
-									{{ user.roles ? user.roles|json_encode : '' }}</div>
+									{# {% if ("{{ user.roles ? user.roles|json_encode : '' }}" == ['ROLE_USER'])%}
+									{{ "Employé"}} #}
+									{# {% else if ( ({{ user.roles ? user.roles|json_encode : '' }} =  ["ROLE_ADMIN"])) %}
+									{{ "Employé"}} #}
+									{# {% else %} #}
+									 {{ user.roles ? user.roles|json_encode : '' }}
+									{# {% endif %} #}
+									</div>
 							</div>
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -40,8 +47,7 @@
 								</td>
 							</div>
 						</div>
-					</div>
-	
+					</div>	
 				{% else %}
 					<tr>
 						<td colspan="9">Aucun employé trouvé</td>
