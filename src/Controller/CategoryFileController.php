@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/category/file')]
+#[Route('/categories')]
 class CategoryFileController extends AbstractController
 {
     #[Route('/', name: 'app_category_file_index', methods: ['GET'])]
@@ -21,7 +21,7 @@ class CategoryFileController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_category_file_new', methods: ['GET', 'POST'])]
+    #[Route('/nouvelle', name: 'app_category_file_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryFileRepository $categoryFileRepository): Response
     {
         $categoryFile = new CategoryFile();
@@ -34,7 +34,7 @@ class CategoryFileController extends AbstractController
             return $this->redirectToRoute('app_category_file_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category_file/new.html.twig', [
+        return $this->render('category_file/new.html.twig', [
             'category_file' => $categoryFile,
             'form' => $form,
         ]);
@@ -48,7 +48,7 @@ class CategoryFileController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_category_file_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_category_file_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CategoryFile $categoryFile, CategoryFileRepository $categoryFileRepository): Response
     {
         $form = $this->createForm(CategoryFileType::class, $categoryFile);
@@ -60,7 +60,7 @@ class CategoryFileController extends AbstractController
             return $this->redirectToRoute('app_category_file_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('category_file/edit.html.twig', [
+        return $this->render('category_file/edit.html.twig', [
             'category_file' => $categoryFile,
             'form' => $form,
         ]);

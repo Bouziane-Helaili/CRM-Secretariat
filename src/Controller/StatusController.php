@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/status')]
+#[Route('/statuts')]
 class StatusController extends AbstractController
 {
     #[Route('/', name: 'app_status_index', methods: ['GET'])]
@@ -21,7 +21,7 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_status_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'app_status_new', methods: ['GET', 'POST'])]
     public function new(Request $request, StatusRepository $statusRepository): Response
     {
         $status = new Status();
@@ -48,7 +48,7 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_status_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_status_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Status $status, StatusRepository $statusRepository): Response
     {
         $form = $this->createForm(StatusType::class, $status);
@@ -60,7 +60,7 @@ class StatusController extends AbstractController
             return $this->redirectToRoute('app_status_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('status/edit.html.twig', [
+        return $this->render('status/edit.html.twig', [
             'status' => $status,
             'form' => $form,
         ]);

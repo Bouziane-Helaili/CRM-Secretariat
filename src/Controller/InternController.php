@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/intern')]
+#[Route('/stagiaires')]
 class InternController extends AbstractController
 {
     #[Route('/', name: 'app_intern_index', methods: ['GET'])]
@@ -30,13 +30,13 @@ class InternController extends AbstractController
         // ]);
     }
 
-    #[Route('/new', name: 'app_intern_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'app_intern_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
         $user = new User();
         $userFile = new UserFile();
         $user->addUserFile($userFile);
-        $user->setRoles(['']);
+        $user->setRoles([]);
 
 
 
@@ -63,7 +63,7 @@ class InternController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_intern_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_intern_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $form = $this->createForm(User1Type::class, $user);
@@ -75,7 +75,7 @@ class InternController extends AbstractController
             return $this->redirectToRoute('app_intern_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('intern/edit.html.twig', [
+        return $this->render('intern/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

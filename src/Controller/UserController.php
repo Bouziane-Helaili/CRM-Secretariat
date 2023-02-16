@@ -14,10 +14,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Role\Role;
 
-#[Route('/user')]
+#[Route('/employe')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+    #[Route('/all', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
 
@@ -27,13 +27,15 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/employe', name: 'app_employe_index', methods: ['GET'])]   
+    #[Route('/', name: 'app_employe_index', methods: ['GET'])]   
     
     public function indexEmploye(ManagerRegistry $doctrine, UserRepository $userRepository): Response
     {
         if ($this->isGranted("ROLE_ADMIN")) {
+            $user = $userRepository->findByRoles('["ROLE_USER"]', '["ROLE_ADMIN"]');
             return $this->render('user/index.html.twig', [
-                'users' => $userRepository->findAll()            ]);
+                'users' => $user
+            ]);
         }elseif($this->isGranted("ROLE_USER")){
             $user = $userRepository->findByRoles('["ROLE_USER"]');
             return $this->render('user/index.html.twig', [
@@ -44,7 +46,7 @@ class UserController extends AbstractController
         };
     }
 
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository,  UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
@@ -84,7 +86,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -96,7 +98,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

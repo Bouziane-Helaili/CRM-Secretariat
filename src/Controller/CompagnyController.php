@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/compagny')]
+#[Route('/entreprises')]
 class CompagnyController extends AbstractController
 {
     #[Route('/', name: 'app_compagny_index', methods: ['GET'])]
@@ -22,7 +22,7 @@ class CompagnyController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_compagny_new', methods: ['GET', 'POST'])]
+    #[Route('/nouvelle', name: 'app_compagny_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CompagnyRepository $compagnyRepository): Response
     {
         $compagny = new Compagny();
@@ -54,7 +54,7 @@ class CompagnyController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_compagny_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_compagny_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Compagny $compagny, CompagnyRepository $compagnyRepository): Response
     {
         $form = $this->createForm(CompagnyType::class, $compagny);

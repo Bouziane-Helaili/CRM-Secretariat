@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau stagiaire{% endblock %}
+{% block title %}Nouveau stagiaire
+{% endblock %}
 
 {% block body %}
-     <h1 class="py-5 text-center">Ajouter un nouveau stagiaire</h1>
+	<h1 class="py-5 text-center">Ajouter un nouveau stagiaire</h1>
 
-   {{ component('intern_add', {
+	{{ component('intern_add', {
         user: user.id  ? user : null,
         form : form
     }) }}
-    <a href="{{ path('app_intern_index') }}">back to list</a>
+	<div class="d-flex justify-content-center p-3">
+		<a href="{{ path('app_intern_index') }}" class="btn btn-success justify-content-center">Revenir à la liste</a>
+	</div>
 {% endblock %}
