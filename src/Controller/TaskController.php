@@ -16,6 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/liste-des-taches')]
 class TaskController extends AbstractController
 {
+    
+       
+        
+        
     #[Route('/', name: 'app_task_index', methods: ['GET', 'POST'])]
     public function index(Request $request, TaskRepository $taskRepository): Response
     {
@@ -25,7 +29,7 @@ class TaskController extends AbstractController
         //     if (!empty($taskIds)) {
         //         $entityManager = $this->getDoctrine()->getManager();
         //         $taskIds = implode(',', $taskIds);
-
+        
         //         $tasks = $taskRepository->createQueryBuilder('t')
         //             ->where('t.id IN (:taskIds)')
         //             ->setParameter('taskIds', $taskIds)
@@ -33,16 +37,16 @@ class TaskController extends AbstractController
         //             ->getResult();
 
         //         foreach ($tasks as $task) {
-        //             $entityManager->remove($task);
-        //         }
-
-        //         $entityManager->flush();
+            //             $entityManager->remove($task);
+            //         }
+            
+            //         $entityManager->flush();
         //     }
 
         //     return $this->render('app_task_index');
         // }
-
-
+        
+        
         return $this->render('task/index.html.twig', [
             'tasks' => $taskRepository->findAll(),
         ]);
@@ -57,10 +61,10 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $taskRepository->save($task, true);
-
+            
             return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->render('task/new.html.twig', [
             'task' => $task,
             'form' => $form,
@@ -108,21 +112,22 @@ class TaskController extends AbstractController
         $this->addFlash('success', 'La tâche est bien enregistrée comme terminée.');
         return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     }
-
+    
     #[Route('/effacer/{id}', name: 'app_task_delete', methods: ['POST'])]
     public function delete(Request $request, Task $task, TaskRepository $taskRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
             $taskRepository->remove($task, true);
         }
-
+        
         return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    
     }
 
-
-        // if ($this->isCsrfTokenValid('done' . $task->getId(), $request->request->get('_token'))) {
+    
+    // if ($this->isCsrfTokenValid('done' . $task->getId(), $request->request->get('_token'))) {
         //     $user = $this->getUser();
         //     $lastName = $user->getName();
         //     $task->setMadeBy($lastName);
@@ -130,12 +135,12 @@ class TaskController extends AbstractController
         //     $taskRepository->save($task, true);
         // }
         // return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        
+        
 
-
-
-    // #[Route('/{id}/supprimer', name: 'app_task_delete_all', methods: ['POST'])]
-    // public function deleteAll($ids, Request $request, Task $task, EntityManagerInterface $entityManager, TaskRepository $taskRepository)
-
+        // #[Route('/{id}/supprimer', name: 'app_task_delete_all', methods: ['POST'])]
+        // public function deleteAll($ids, Request $request, Task $task, EntityManagerInterface $entityManager, TaskRepository $taskRepository)
+        
     // {
     //     $taskIds []= $request->request->get('tasks');
     //     if ($form->isSubmitted() && $form->isValid()) {
@@ -147,11 +152,11 @@ class TaskController extends AbstractController
     //         $tasks = $entityManager->getRepository(Task::class)->findBy(['id' => $taskIds]);
 
     //         foreach ($tasks as $task) {
-    //             $entityManager->remove($task);
+        //             $entityManager->remove($task);
     //         }
 
     //         $entityManager->flush();
-
+    
     //         $this->addFlash('success', count($tasks) . ' tâches ont été supprimées.');
 
     //         return $this->redirectToRoute('app_task_index');
@@ -159,11 +164,11 @@ class TaskController extends AbstractController
 
     //     return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     // }
+    
+    
 
-
-
-
-
+    
+    
 
 
 
@@ -172,19 +177,19 @@ class TaskController extends AbstractController
 
     // $taskIds = $request->request->get('tasks');
     // if ($form->isSubmitted() && $form->isValid()) {
-    //     if (!is_array($taskIds)) {
-    //         $this->addFlash('warning', 'Veuillez sélectionner des tâches à supprimer.');
-    //         return $this->redirectToRoute('app_task_index');
-    //     }
+        //     if (!is_array($taskIds)) {
+            //         $this->addFlash('warning', 'Veuillez sélectionner des tâches à supprimer.');
+            //         return $this->redirectToRoute('app_task_index');
+            //     }
 
-    //     $tasks = $entityManager->getRepository(Task::class)->findBy(['id' => $taskIds]);
+            //     $tasks = $entityManager->getRepository(Task::class)->findBy(['id' => $taskIds]);
 
     //     foreach ($tasks as $task) {
     //         $entityManager->remove($task);
     //     }
 
     //     $entityManager->flush();
-
+    
     //     $this->addFlash('success', count($tasks) . ' tâches ont été supprimées.');
 
     //     return $this->redirectToRoute('app_task_index');
@@ -195,7 +200,7 @@ class TaskController extends AbstractController
 
 
 
-
+    
 
 
     //     public function deleteAll($ids)
@@ -205,8 +210,9 @@ class TaskController extends AbstractController
 
     //     $queryBuilder->delete(Task::class, 't')
     //         ->where($queryBuilder->expr()->in('t.id', $ids));
-
+    
     //     $query = $queryBuilder->getQuery();
     //     $query->execute();
     // }
 
+    

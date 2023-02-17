@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Compagny;
+use App\Traits\Login;
 use App\Entity\CompagnyFile;
 use App\Form\CompagnyType;
 use App\Repository\CompagnyRepository;
@@ -11,12 +12,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// if (trait_exists(Login::class)) {
+//    dd("ok");
+// } else {
+//     dd("pas ok");
+// }
+
 #[Route('/entreprises')]
 class CompagnyController extends AbstractController
 {
+    use Login;
+    
     #[Route('/', name: 'app_compagny_index', methods: ['GET'])]
     public function index(CompagnyRepository $compagnyRepository): Response
     {
+       
+        
         return $this->render('compagny/index.html.twig', [
             'compagnies' => $compagnyRepository->findAll(),
         ]);
