@@ -34,7 +34,8 @@ class CompagnyType extends AbstractType
                 'label' => "Adresse"
             ])
             ->add('additionalAddress', TextType::class, [
-                'label' => "Complément d'adresse"
+                'label' => "Complément d'adresse",
+                'required' => false,
             ])
             ->add('zipCode', NumberType::class, [
                 'label' => 'Code postal'
@@ -50,7 +51,8 @@ class CompagnyType extends AbstractType
                 'label' => 'Numéro de SIRET'
             ])
             ->add('comment', TextareaType::class, [
-                'label' => "Commentaire"
+                'label' => "Commentaire",
+                'required' => false
             ])
             ->add('compagnyFiles', CollectionType::class, [
                 'entry_type' => CompagnyFileType::class,

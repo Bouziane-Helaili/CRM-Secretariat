@@ -27,7 +27,7 @@ class CompagnyController extends AbstractController
     {
         $compagny = new Compagny();
         $compagnyFile = new CompagnyFile();
-        $compagny -> addCompagnyFile( $compagnyFile);
+        $compagny->addCompagnyFile($compagnyFile);
 
 
 
@@ -36,7 +36,7 @@ class CompagnyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $compagnyRepository->save($compagny, true);
-
+            $this->addFlash('success'," L'entreprise a été ajoutée avec succès");
             return $this->redirectToRoute('app_compagny_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -62,11 +62,11 @@ class CompagnyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $compagnyRepository->save($compagny, true);
-
+            $this->addFlash('success'," L'entreprise {{Compagny.name}} a été modifié avec succès");
             return $this->redirectToRoute('app_compagny_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('compagny/edit.html.twig', [
+        return $this->render('compagny/edit.html.twig', [
             'compagny' => $compagny,
             'form' => $form,
         ]);
@@ -75,7 +75,7 @@ class CompagnyController extends AbstractController
     #[Route('/{id}', name: 'app_compagny_delete', methods: ['POST'])]
     public function delete(Request $request, Compagny $compagny, CompagnyRepository $compagnyRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$compagny->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $compagny->getId(), $request->request->get('_token'))) {
             $compagnyRepository->remove($compagny, true);
         }
 

@@ -54,7 +54,8 @@ class UserType extends AbstractType
                 'label' => "Adresse"
             ])
             ->add('additionalAddress', TextType::class, [
-                'label' => "Complément d'adresse"
+                'label' => "Complément d'adresse",
+                'required' => false,
             ])
             ->add('zipCode', NumberType::class, [
                 'label' => 'Code postal'
@@ -80,6 +81,7 @@ class UserType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'required' => false,
 
             ]);
     }

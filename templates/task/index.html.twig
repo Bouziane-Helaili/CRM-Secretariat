@@ -1,37 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task index{% endblock %}
+{% block title %} index des tâches
+{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Voici la liste des tâches</h1>
+	<h1 class="py-5 text-center">Voici la liste des tâches</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>MadeBy</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.name }}</td>
-                <td>{{ task.madeBy }}</td>
-                <td>
-                    <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
-                    <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Pas de tache pour le moment</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	{# <form action="{{ path('app_task_delete_all') }}" method="post"> #}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Selection</th>
+					<th>Description</th>
+					<th>Faite par</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for task in tasks %}
+					<tr>
+						<td><input type="checkbox" name="tasks[]" value="{{ task.id }}"></td>
+						<td>{{ task.name }}</td>
+						<td>{{ task.madeBy }}</td>
+						<td>
+							<a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-success">Détails</a>
+							<a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning">Modifier</a>
+							{{ include('task/_delete_form.html.twig') }}
+							{{ include('task/_done_form.html.twig') }}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">Pas de tache pour le moment</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-    <a href="{{ path('app_task_new') }}">Ajouter une nouvelle tâche</a>
+		{# <input type='submit' value='Supprimer les tâches sélectionnées' name="deleteall" class="btn btn-danger mb-3 mx-auto"> #}
+	{# </form> #}
+	
+	<a href="{{ path('app_task_new') }}" class="btn btn-primary mb-3 mx-auto">Ajouter une nouvelle tâche</a>
 {% endblock %}

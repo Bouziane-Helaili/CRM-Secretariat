@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_task_done', {'id': task.id}) }}" onsubmit="return confirm('Veuillez confirmer la réalisation de cette tâche ?');">
+    {# <input type="hidden" name="_token" value="{{ csrf_token('done' ~ task.id) }}"> #}
+    <button class="btn btn-primary">Déclarer faite</button>
+</form>

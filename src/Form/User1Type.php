@@ -30,7 +30,8 @@ class User1Type extends AbstractType
                 'label' => "Adresse"
             ])
             ->add('additionalAddress', TextType::class, [
-                'label' => "Complément d'adresse"
+                'label' => "Complément d'adresse",
+                'required' => false,
             ])
             ->add('zipCode', NumberType::class, [
                 'label' => 'Code postal'
@@ -50,7 +51,8 @@ class User1Type extends AbstractType
                 'label' => 'Numéro Sécurité Sociale'
             ])
             ->add('comment', TextareaType::class, [
-                'label' => "Commentaire"
+                'label' => "Commentaire",
+                'required' => false,
             ])
             ->add('status', null, [
                 'label' => "Statuts"

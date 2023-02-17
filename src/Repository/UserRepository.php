@@ -70,8 +70,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->setParameter('val2', $value2);
         }
 
-        return $queryBuilder->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $queryBuilder->orderBy('u.name', 'ASC')
             ->getQuery()
             ->getResult();
     }
