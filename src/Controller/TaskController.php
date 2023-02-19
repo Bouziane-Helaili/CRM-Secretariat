@@ -16,8 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/liste-des-taches')]
 class TaskController extends AbstractController
 {
-    
-       
         
         
     #[Route('/', name: 'app_task_index', methods: ['GET', 'POST'])]

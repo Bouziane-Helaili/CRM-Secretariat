@@ -3,7 +3,7 @@
 {% block title %}Modification{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Modification {{compagny.compagnyName}}</h1>
+    <h1 class="py-5 text-center">Modification {{compagny.name}}</h1>
 
    {{ component('compagny_add', {
         compagny: compagny.id  ? compagny : null,

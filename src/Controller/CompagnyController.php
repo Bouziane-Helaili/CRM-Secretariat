@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Compagny;
-use App\Traits\Login;
+use App\Trait\LoginTrait;
 use App\Entity\CompagnyFile;
 use App\Form\CompagnyType;
 use App\Repository\CompagnyRepository;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/entreprises')]
 class CompagnyController extends AbstractController
 {
-    use Login;
+    use LoginTrait;
     
     #[Route('/', name: 'app_compagny_index', methods: ['GET'])]
     public function index(CompagnyRepository $compagnyRepository): Response

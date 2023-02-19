@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Trait\HasIdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -17,10 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 // #[UniqueEntity(message: "{{ value }} existe déjà")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    
+use HasIdTrait;
 
     #[ORM\Column(length: 180)]
     #[Assert\Email(
@@ -36,14 +35,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(nullable: true)]
     private ?string $password = null;
-
-    #[ORM\Column(length: 255)]
-    // #[Assert\Regex(
-    //     pattern: '/\d/',
-    //     match: false,
-    //     message: 'Votre nom ne peut pas contenir un chiffre',
-    // )]
-    private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     // #[Assert\Regex(
@@ -94,11 +85,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->tasks = new ArrayCollection();
         $this->userFiles = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getEmail(): ?string
@@ -164,18 +150,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getFirstName(): ?string

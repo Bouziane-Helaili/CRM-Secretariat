@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CompagnyRepository;
+use App\Trait\HasIdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -13,13 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CompagnyRepository::class)]
 class Compagny
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $compagnyName = null;
+   
+use HasIdTrait;
 
     #[ORM\Column(length: 255)]
     private ?string $leaderName = null;
@@ -59,23 +55,6 @@ class Compagny
         $this->compagnyFiles = new ArrayCollection();
     }
 
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getCompagnyName(): ?string
-    {
-        return $this->compagnyName;
-    }
-
-    public function setCompagnyName(string $compagnyName): self
-    {
-        $this->compagnyName = $compagnyName;
-
-        return $this;
-    }
 
     public function getLeaderName(): ?string
     {

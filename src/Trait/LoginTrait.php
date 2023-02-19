@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Traits;
+namespace App\Trait;
 
-trait Login
+trait LoginTrait
 {
 
-     public function Login()
+     public function LoginTrait()
     {
         $user = $this->getUser();
         $isFirstLogin = $user->isIsFirstLogin();
         if ($isFirstLogin === true) {
-
-            return $this->redirectToRoute("app_home");
+            $this->redirectToRoute("app_home");
         }
     }
 }

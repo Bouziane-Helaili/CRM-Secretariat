@@ -21,7 +21,7 @@ class CompagnyType extends AbstractType
     {
        
         $builder
-            ->add('compagnyName', TextType::class, [
+            ->add('name', TextType::class, [
                 'label' => "Nom de l'entreprise"
             ])
             ->add('leaderName', TextType::class, [
