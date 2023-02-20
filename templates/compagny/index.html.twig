@@ -5,101 +5,48 @@
 
 {% block body %}
 	<h1 class="py-5 text-center">liste des entreprises</h1>
-
-	<section class="py-5">
-		<div class="container px-4 px-lg-5 mt-5">
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
+	<section>
+		<div class="container px-4 px-lg-5 mt-5 ">
+			<div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-center">
 				{% for compagny in compagnies %}
-
-					
-						<div class="col mb-5 card text-white bg-dark container p-2 ">
-							<div class="card-body p-4">
-								<div class="">
-
-									<h5 class="fw-bolder text-center">{{ compagny.name  }}</h5>
-									<!-- Product price-->
-									<div>
-										<span class="text-muted">Responsable :
-										</span>
-										{{  compagny.leaderName }}
-										{{  compagny.leaderFirstName }}
-										</div>
-									<div>
-										<span class="text-muted">Téléphone :
-										</span>
-										{{ compagny.phone }}</div>
-									<div>
-										<span class="text-muted">Email :
-										</span>
-										{{ compagny.mail }}</div>
+					<div class="col card text-white bg-dark p-2 m-2">
+						<div class="card-body">
+							<div>
+								<h5 class="fw-bolder text-center">{{ compagny.name  }}</h5>
+								<div>
+									<span class="text-muted">Responsable :
+									</span>
+									{{  compagny.leaderName }}
+									{{  compagny.leaderFirstName }}
 								</div>
-							</div>
-
-							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-								<div class="text-center">
-									<td>
-										<a href="{{ path('app_compagny_show', {'id': compagny.id}) }}" class="btn btn-sm btn-primary">Voir le détail</a>
-										<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}" class="btn btn-sm btn-success">Modifier</a>
-									</td>
-								</div>
+								<div>
+									<span class="text-muted">Téléphone :
+									</span>
+									{{ compagny.phone }}</div>
+								<div>
+									<span class="text-muted">Email :
+									</span>
+									{{ compagny.mail }}</div>
 							</div>
 						</div>
-				
+						<div class="card-footer p-4 pt-0 border-top-0 ">
+							<div class="text-center">
+								<td>
+									<a href="{{ path('app_compagny_show', {'id': compagny.id}) }}" class="btn btn-sm btn-primary">Voir le détail</a>
+									<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+								</td>
+							</div>
+						</div>
+					</div>
 				{% else %}
 					<tr>
 						<td colspan="9">Aucune entreprise trouvée</td>
 					</tr>
 				{% endfor %}
 			</div>
-
-	<a href="{{ path('app_compagny_new') }}" class="btn btn-sm btn-dark">Ajouter une entreprise</a>
+			<div class="d-flex justify-content-center">
+				<a href="{{ path('app_compagny_new') }}" class="btn btn-sm btn-dark">Ajouter une entreprise</a>
+			</div>
 		</div>
 	</section>
-{# 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>CompagnyName</th>
-				<th>LeaderName</th>
-				<th>LeaderFirstName</th>
-				<th>Address</th>
-				<th>AdditionalAddress</th>
-				<th>ZipCode</th>
-				<th>City</th>
-				<th>Mail</th>
-				<th>Phone</th>
-				<th>SiretNumber</th>
-				<th>Comment</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for compagny in compagnies %}
-				<tr>
-					<td>{{ compagny.id }}</td>
-					<td>{{ compagny.compagnyName }}</td>
-					<td>{{ compagny.leaderName }}</td>
-					<td>{{ compagny.leaderFirstName }}</td>
-					<td>{{ compagny.address }}</td>
-					<td>{{ compagny.additionalAddress }}</td>
-					<td>{{ compagny.zipCode }}</td>
-					<td>{{ compagny.city }}</td>
-					<td>{{ compagny.mail }}</td>
-					<td>{{ compagny.phone }}</td>
-					<td>{{ compagny.siretNumber }}</td>
-					<td>{{ compagny.comment }}</td>
-					<td>
-						<a href="{{ path('app_compagny_show', {'id': compagny.id}) }}">show</a>
-						<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="13">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table> #}
 {% endblock %}

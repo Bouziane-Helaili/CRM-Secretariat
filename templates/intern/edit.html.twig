@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modifier un stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    
+    <h1 class="py-5 text-center">{{user.name}} {{user.firstName}} : modifier la fiche</h1>
 
-    {{ include('intern/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ component('intern_add', {
+        user: user.id  ? user : null,
+        form : form
+    }) }}
 
-    <a href="{{ path('app_intern_index') }}">back to list</a>
+    <a href="{{ path('app_intern_index') }}" class="btn btn-success ">Revenir à la liste</a>
 
     {{ include('intern/_delete_form.html.twig') }}
 {% endblock %}

@@ -5,14 +5,10 @@
 
 {% block body %}
 	<h1 class="py-5 text-center">Liste des employés</h1>
-
-
 	<section>
 		<div class="container px-4 px-lg-5 mt-5 ">
 			<div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-center">
-
 				{% for user in users %}
-
 					<div class="col card text-white bg-dark p-2 m-2">
 						<div class="card-body">
 							<div>
@@ -30,9 +26,9 @@
 									<span class="text-muted">Fonction :
 									</span>
 									{# {% if ("{{ user.roles ? user.roles|json_encode : '' }}" == ['ROLE_USER'])%}
-																		{{ "Employé"}} #}
+																											{{ "Employé"}} #}
 									{# {% else if ( ({{ user.roles ? user.roles|json_encode : '' }} =  ["ROLE_ADMIN"])) %}
-																		{{ "Employé"}} #}
+																											{{ "Employé"}} #}
 									{# {% else %} #}
 								{{ user.roles ? user.roles|json_encode : '' }}
 									{# {% endif %} #}
@@ -55,7 +51,7 @@
 				{% endfor %}
 			</div>
 			<div class="d-flex justify-content-center">
-			<a href="{{ path('app_user_new') }}" class="btn btn-sm btn-dark">Ajouter un employé</a>
+				<a href="{{ path('app_user_new') }}" class="btn btn-sm btn-dark">Ajouter un employé</a>
 			</div>
 		</div>
 	</section>

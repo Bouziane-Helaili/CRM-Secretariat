@@ -3,7 +3,7 @@
 {% block title %}Modifier un employé{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Modifier la fiche d'un employé</h1>
+    <h1 class="py-5 text-center">{{user.name}} {{user.firstName}} : modifier la fiche</h1>
 
     {{ component('user_add', {
         user: user.id  ? user : null,
