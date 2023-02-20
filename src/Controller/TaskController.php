@@ -25,7 +25,7 @@ class TaskController extends AbstractController
         $user = $this->getUser();
         $isFirstLogin = $user->isIsFirstLogin();        
         if ($isFirstLogin) {
-            return $this->redirectToRoute("app_home");
+            return $this->redirectToRoute("app_forgot_password_request");
         }
 
 
