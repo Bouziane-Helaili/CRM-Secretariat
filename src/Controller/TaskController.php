@@ -76,7 +76,7 @@ class TaskController extends AbstractController
             'form' => $form,
         ]);
     }
-    
+
 
     #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]
     public function show(Task $task): Response
@@ -128,9 +128,7 @@ class TaskController extends AbstractController
         }
         
         return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    
+    }    
     }
 
     
