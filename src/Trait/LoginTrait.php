@@ -9,8 +9,8 @@ trait LoginTrait
     {
         $user = $this->getUser();
         $isFirstLogin = $user->isIsFirstLogin();
-        if ($isFirstLogin === true) {
-            $this->redirectToRoute("app_home");
+        if ($isFirstLogin ) {
+            return $this->redirectToRoute("app_home");
         }
     }
 }

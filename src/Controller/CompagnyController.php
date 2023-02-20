@@ -22,12 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompagnyController extends AbstractController
 {
     use LoginTrait;
-    
+
     #[Route('/', name: 'app_compagny_index', methods: ['GET'])]
     public function index(CompagnyRepository $compagnyRepository): Response
     {
-       
-        
+
         return $this->render('compagny/index.html.twig', [
             'compagnies' => $compagnyRepository->findAll(),
         ]);
@@ -47,7 +46,7 @@ class CompagnyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $compagnyRepository->save($compagny, true);
-            $this->addFlash('success'," L'entreprise a été ajoutée avec succès");
+            $this->addFlash('success', " L'entreprise a été ajoutée avec succès");
             return $this->redirectToRoute('app_compagny_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,7 +72,7 @@ class CompagnyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $compagnyRepository->save($compagny, true);
-            $this->addFlash('success'," L'entreprise {{Compagny.name}} a été modifié avec succès");
+            $this->addFlash('success', " L'entreprise {{Compagny.name}} a été modifié avec succès");
             return $this->redirectToRoute('app_compagny_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -21,6 +21,14 @@ class TaskController extends AbstractController
     #[Route('/', name: 'app_task_index', methods: ['GET', 'POST'])]
     public function index(Request $request, TaskRepository $taskRepository): Response
     {
+
+        $user = $this->getUser();
+        $isFirstLogin = $user->isIsFirstLogin();        
+        if ($isFirstLogin) {
+            return $this->redirectToRoute("app_home");
+        }
+
+
         // if ($request->isMethod('POST')) {
         //     $taskIds = $request->request->get('tasks');
 

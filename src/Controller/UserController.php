@@ -61,17 +61,13 @@ class UserController extends AbstractController
             )
         );
 
-
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
-
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
@@ -94,10 +90,8 @@ class UserController extends AbstractController
         // dd($user->getRoles());
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
-
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
@@ -113,4 +107,9 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+    
 }
