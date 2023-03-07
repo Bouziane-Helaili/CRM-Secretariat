@@ -25,12 +25,10 @@
 				<span class="text-muted">Email :
 				</span>
 				{{ user.email }}
-
 				<br>
 				<span class="text-muted">Numéro de Sécurité sociale :
 				</span>
 				{{ user.ssNumber }}
-
 			</div>
 			<div class="col-6 border p-3">
 				<span class="text-muted">Adresse :
@@ -66,8 +64,10 @@
 		</div>
 		<div class=" text-center">
 			<a href="{{ path('app_intern_index') }}"  class="btn btn-success">Retour à la liste</a>
+			{% if is_granted('ROLE_ADMIN') %}
 			<a href="{{ path('app_intern_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
 			{{ include('intern/_delete_form.html.twig') }}
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

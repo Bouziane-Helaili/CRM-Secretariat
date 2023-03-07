@@ -33,7 +33,9 @@
 							<div class="text-center">
 								<td>
 									<a href="{{ path('app_compagny_show', {'id': compagny.id}) }}" class="btn btn-sm btn-primary">Voir le détail</a>
-									<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									{% if is_granted('ROLE_ADMIN') %}
+										<a href="{{ path('app_compagny_edit', {'id': compagny.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									{% endif %}
 								</td>
 							</div>
 						</div>
@@ -44,9 +46,11 @@
 					</tr>
 				{% endfor %}
 			</div>
-			<div class="d-flex justify-content-center">
-				<a href="{{ path('app_compagny_new') }}" class="btn btn-sm btn-dark">Ajouter une entreprise</a>
-			</div>
+			{% if is_granted('ROLE_ADMIN') %}
+				<div class="d-flex justify-content-center">
+					<a href="{{ path('app_compagny_new') }}" class="btn btn-sm btn-dark">Ajouter une entreprise</a>
+				</div>
+			{% endif %}
 		</div>
 	</section>
 {% endblock %}

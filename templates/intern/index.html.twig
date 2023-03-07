@@ -9,9 +9,7 @@
 	<section>
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-center">
-				
 				{% for user in users %}
-					
 					<div class="col card text-white bg-dark p-2 m-2">
 						<div class="card-body">
 							<div>
@@ -35,21 +33,24 @@
 							<div class="text-center">
 								<td>
 									<a href="{{ path('app_intern_show', {'id': user.id}) }}" class="btn btn-sm btn-primary">Voir la fiche</a>
-									<a href="{{ path('app_intern_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									{% if is_granted('ROLE_ADMIN') %}
+										<a href="{{ path('app_intern_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									{% endif %}
 								</td>
 							</div>
 						</div>
 					</div>
-	
 				{% else %}
 					<tr>
 						<td colspan="9">Aucun stagiaire rouvé</td>
 					</tr>
 				{% endfor %}
 			</div>
+			{% if is_granted('ROLE_ADMIN') %}
 			<div class="d-flex justify-content-center">
-			<a href="{{ path('app_intern_new') }}" class="btn btn-sm btn-dark">Ajouter un stagiaire</a>
+				<a href="{{ path('app_intern_new') }}" class="btn btn-sm btn-dark">Ajouter un stagiaire</a>
 			</div>
+			{% endif %}
 		</div>
 	</section>
 {% endblock %}

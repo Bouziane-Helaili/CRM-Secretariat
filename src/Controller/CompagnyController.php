@@ -7,6 +7,7 @@ use App\Trait\LoginTrait;
 use App\Entity\CompagnyFile;
 use App\Form\CompagnyType;
 use App\Repository\CompagnyRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,7 @@ class CompagnyController extends AbstractController
     }
 
     #[Route('/nouvelle', name: 'app_compagny_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, CompagnyRepository $compagnyRepository): Response
     {
         $compagny = new Compagny();
@@ -65,6 +67,7 @@ class CompagnyController extends AbstractController
     }
 
     #[Route('/{id}/modifier', name: 'app_compagny_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Compagny $compagny, CompagnyRepository $compagnyRepository): Response
     {
         $form = $this->createForm(CompagnyType::class, $compagny);
@@ -83,6 +86,7 @@ class CompagnyController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_compagny_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Compagny $compagny, CompagnyRepository $compagnyRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $compagny->getId(), $request->request->get('_token'))) {

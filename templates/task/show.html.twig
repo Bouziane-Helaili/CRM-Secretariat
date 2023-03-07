@@ -1,30 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail de la tâche{% endblock %}
+{% block title %}Détail de la tâche
+{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Détail de la tâche</h1>
+	<h1 class="py-5 text-center">Détail de la tâche</h1>
 
-    <table class="table">
-        <tbody>
-            {# <tr>
-                <th>Id</th>
-                <td>{{ task.id }}</td>
-            </tr> #}
-            <tr>
-                <th>Description</th>
-                <td>{{ task.name }}</td>
-            </tr>
-            <tr>
-                <th>MadeBy</th>
-                <td>{{ task.madeBy }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_task_index') }}" class="btn btn-primary">Retour à la liste</a>
-
-    <a href="{{ path('app_task_edit', {'id': task.id}) }}"  class="btn btn-warning">Modifier</a>
-
-    {{ include('task/_delete_form.html.twig') }}
+	<table class="table">
+		<tbody>
+			{# <tr>
+			                <th>Id</th>
+			                <td>{{ task.id }}</td>
+			            </tr> #}
+			<tr>
+				<th>Description</th>
+				<td>{{ task.name }}</td>
+			</tr>
+			<tr>
+				<th>Faite par</th>
+				<td>{{ task.madeBy }}</td>
+			</tr>
+		</tbody>
+	</table>
+    {{ include('task/_done_form.html.twig') }}
+	<a href="{{ path('app_task_index') }}" class="btn btn-primary">Retour à la liste</a>
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning">Modifier</a>
+		{{ include('task/_delete_form.html.twig') }}
+	{% endif %}
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit CategoryFile{% endblock %}
+{% block title %}Modifier la catégorie{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Edit CategoryFile</h1>
+    <h1 class="py-5 text-center">Modifier la catégorie</h1>
 
-    {{ include('category_file/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('category_file/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a href="{{ path('app_category_file_index') }}">back to list</a>
+    <a href="{{ path('app_category_file_index') }}" class="btn btn-success ">Retour à la liste</a>
 
     {{ include('category_file/_delete_form.html.twig') }}
 {% endblock %}

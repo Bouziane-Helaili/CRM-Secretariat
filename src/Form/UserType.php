@@ -30,6 +30,7 @@ class UserType extends AbstractType
                 'multiple'=> true,
                 'data' => ['ROLE_USER']
             ])
+            
         //     ->add('roles', ChoiceType::class, [
         //         // 'mapped' => false,
         //         'label' => 'rôle',
@@ -82,8 +83,9 @@ class UserType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 // 'required' => false,
-
             ]);
+            
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

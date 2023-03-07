@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Status{% endblock %}
+{% block title %}Modifier le statut{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Edit Status</h1>
+    <h1 class="py-5 text-center">Modifier le statut</h1>
 
-    {{ include('status/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('status/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a href="{{ path('app_status_index') }}">back to list</a>
+    <a href="{{ path('app_status_index') }}" class="btn btn-success ">Retour à la liste</a>
 
     {{ include('status/_delete_form.html.twig') }}
 {% endblock %}

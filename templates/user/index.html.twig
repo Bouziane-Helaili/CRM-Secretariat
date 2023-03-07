@@ -26,9 +26,9 @@
 									<span class="text-muted">Fonction :
 									</span>
 									{# {% if ("{{ user.roles ? user.roles|json_encode : '' }}" == ['ROLE_USER'])%}
-																											{{ "Employé"}} #}
+																																				{{ "Employé"}} #}
 									{# {% else if ( ({{ user.roles ? user.roles|json_encode : '' }} =  ["ROLE_ADMIN"])) %}
-																											{{ "Employé"}} #}
+																																				{{ "Employé"}} #}
 									{# {% else %} #}
 								{{ user.roles ? user.roles|json_encode : '' }}
 									{# {% endif %} #}
@@ -39,7 +39,9 @@
 							<div class="text-center">
 								<td>
 									<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-primary">Voir la fiche</a>
-									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									{% if is_granted('ROLE_ADMIN') %}
+										<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+									{% endif %}
 								</td>
 							</div>
 						</div>
@@ -50,9 +52,11 @@
 					</tr>
 				{% endfor %}
 			</div>
+			{% if is_granted('ROLE_ADMIN') %}
 			<div class="d-flex justify-content-center">
 				<a href="{{ path('app_user_new') }}" class="btn btn-sm btn-dark">Ajouter un employé</a>
 			</div>
+			{% endif %}
 		</div>
 	</section>
 {% endblock %}

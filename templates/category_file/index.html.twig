@@ -1,37 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CategoryFile index{% endblock %}
+{% block title %}Catégories existantes
+{% endblock %}
 
 {% block body %}
-    <h1 class="py-5 text-center">Liste des catégories existantes</h1>
+	<h1 class="py-5 text-center">Liste des catégories existantes</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category_file in category_files %}
-            <tr>
-                <td>{{ category_file.id }}</td>
-                <td>{{ category_file.name }}</td>
-                <td>{{ category_file.type }}</td>
-                <td>
-                    <a href="{{ path('app_category_file_show', {'id': category_file.id}) }}">show</a>
-                    <a href="{{ path('app_category_file_edit', {'id': category_file.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Type</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for category_file in category_files %}
+				<tr>
+					<td>{{ category_file.name }}</td>
+					<td>{{ category_file.type }}</td>
+					<td>
+						<a href="{{ path('app_category_file_show', {'id': category_file.id}) }}" class="btn btn-sm btn-primary">Voir le détail</a>
+						<a href="{{ path('app_category_file_edit', {'id': category_file.id}) }}" class="btn btn-sm btn-success">Modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">Aucune catégorie trouvée</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_category_file_new') }}">Create new</a>
+	<a href="{{ path('app_category_file_new') }}" class="btn btn-sm btn-dark">Ajouter une catégorie</a>
 {% endblock %}

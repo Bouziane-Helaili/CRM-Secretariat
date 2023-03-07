@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 <style>
@@ -16,5 +16,9 @@
         <li>Your controller at <code><a href="{{ 'C:/Users/alger/Desktop/Virginia/CRM3/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'C:/Users/alger/Desktop/Virginia/CRM3/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
     </ul>
+
+    <div>
+    <a href="{{path('app_login')}}" class="btn btn-success">Connexion</a>
+    </div>
 </div>
 {% endblock %}
