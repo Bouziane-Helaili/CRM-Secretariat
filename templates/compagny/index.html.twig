@@ -5,6 +5,11 @@
 
 {% block body %}
 	<h1 class="py-5 text-center">liste des entreprises</h1>
+	{# {{ form(searchForm) }} #}
+	{{ form_start(searchForm) }}
+	{{ form_row(searchForm.name) }}
+	{# {{ form_row(searchForm.submit) }} #}
+	{{ form_end(searchForm) }}
 	<section>
 		<div class="container px-4 px-lg-5 mt-5 ">
 			<div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-center">

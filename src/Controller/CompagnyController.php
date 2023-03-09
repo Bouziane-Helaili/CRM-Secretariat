@@ -6,6 +6,7 @@ use App\Entity\Compagny;
 use App\Trait\LoginTrait;
 use App\Entity\CompagnyFile;
 use App\Form\CompagnyType;
+use App\Form\SearchType;
 use App\Repository\CompagnyRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,11 +25,22 @@ class CompagnyController extends AbstractController
 {
     use LoginTrait;
 
-    #[Route('/', name: 'app_compagny_index', methods: ['GET'])]
-    public function index(CompagnyRepository $compagnyRepository): Response
+    #[Route('/', name: 'app_compagny_index')]
+    public function index(Request $request, CompagnyRepository $compagnyRepository): Response
     {
 
+        $searchForm = $this->createForm(SearchType::class);
+        $searchForm->handleRequest($request);
+        
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+
+            $data = $searchForm->getData();
+            dd($data);
+           
+        }
         return $this->render('compagny/index.html.twig', [
+            'searchForm' => $searchForm,
             'compagnies' => $compagnyRepository->findAll(),
         ]);
     }
@@ -40,8 +52,6 @@ class CompagnyController extends AbstractController
         $compagny = new Compagny();
         $compagnyFile = new CompagnyFile();
         $compagny->addCompagnyFile($compagnyFile);
-
-
 
         $form = $this->createForm(CompagnyType::class, $compagny);
         $form->handleRequest($request);
