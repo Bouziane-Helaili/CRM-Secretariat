@@ -27,23 +27,24 @@ class CompagnyController extends AbstractController
 
     #[Route('/', name: 'app_compagny_index')]
     public function index(Request $request, CompagnyRepository $compagnyRepository): Response
-    {
+{
+    $searchForm = $this->createForm(SearchType::class);
+    $searchForm->handleRequest($request);
 
-        $searchForm = $this->createForm(SearchType::class);
-        $searchForm->handleRequest($request);
-        
-
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-
-            $data = $searchForm->getData();
-            dd($data);
-           
-        }
-        return $this->render('compagny/index.html.twig', [
-            'searchForm' => $searchForm,
-            'compagnies' => $compagnyRepository->findAll(),
-        ]);
+    if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+        $data = $searchForm->getData();
+       
+        $compagnies = $data;
+        // dd($compagnies);
+    } else {
+        $compagnies = $compagnyRepository->findAll();
     }
+
+    return $this->render('compagny/index.html.twig', [
+        'searchForm' => $searchForm->createView(),
+        'compagnies' => $compagnies,
+    ]);
+}
 
     #[Route('/nouvelle', name: 'app_compagny_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
